@@ -3,12 +3,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace OnionArchitecture.Core.Models
 {
-    class Blog
+    public class Blog
     {
         private string? _publisher;
 
         [BsonId]
-        public required string Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         [BsonElement("title")]
         public required string Title { get; set; }
@@ -21,5 +22,10 @@ namespace OnionArchitecture.Core.Models
             {
                 _publisher = string.IsNullOrEmpty(value) ? "Unknown" : value;
             } }
+    }
+
+    public class BlogSample
+    {
+        public string Id { get; set; }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace OnionArchitecture.Core.Interfaces
 {
-    interface IBlogRepository
+    public interface IBlogRepository
     {
-        Task<List<Blog>> GetAllBlogs();
-        Task CreateBlog(Blog blog);
+        Task<IEnumerable<Blog>> getAllBlogsAsync();
+        Task addBlogAsync(Blog blog);
     }
 }
