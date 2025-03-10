@@ -1,0 +1,42 @@
+﻿using System;
+using AutoMapper;
+using Mongo2Go;
+using MongoDB.Driver;
+using OnionArchitecture.Application.Mappings;
+using OnionArchitecture.Application.Services;
+using OnionArchitecture.Infrastructure.DBContext;
+using OnionArchitecture.Infrastructure.Repositories;
+
+public class BlogServiceFixture : IDisposable
+{
+    public MongoDbRunner MongoRunner { get; }
+    public IMongoDatabase Database { get; }
+    public MongoDbContext DbContext { get; }
+    public BlogRepository BlogRepository { get; }
+    public BlogService BlogService { get; }
+    public IMapper Mapper { get; }
+
+    public BlogServiceFixture()
+    {
+        // 1️⃣ Start a Mongo2Go instance
+        MongoRunner = MongoDbRunner.Start();
+        var client = new MongoClient(MongoRunner.ConnectionString);
+        Database = client.GetDatabase("TestDb");
+
+        // 2️⃣ Set up MongoDbContext and Repository
+        DbContext = new MongoDbContext(client, "TestDb");
+        BlogRepository = new BlogRepository(DbContext);
+
+        // 3️⃣ Configure AutoMapper
+        var config = new MapperConfiguration(cfg => cfg.AddProfile<BlogProfile>());
+        Mapper = config.CreateMapper();
+
+        // 4️⃣ Initialize BlogService
+        BlogService = new BlogService(BlogRepository, Mapper);
+    }
+
+    public void Dispose()
+    {
+        MongoRunner.Dispose();
+    }
+}
