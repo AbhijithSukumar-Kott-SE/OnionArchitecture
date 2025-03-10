@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Castle.Core.Logging;
+using FluentAssertions;
 using OnionArchitecture.Application.DTOs;
 using OnionArchitecture.Application.Services;
 using OnionArchitecture.Tests.BlogTest;

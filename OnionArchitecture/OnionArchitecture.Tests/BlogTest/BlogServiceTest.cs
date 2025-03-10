@@ -16,6 +16,7 @@ namespace OnionArchitecture.Tests.BlogTest
         private readonly IBlogService _blogService;
         private readonly IMapper _mockMapper;
 
+
         public BlogServiceTest()
         {
             _mockBlogRepository = Substitute.For<IBlogRepository>();
@@ -55,6 +56,7 @@ namespace OnionArchitecture.Tests.BlogTest
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(expectedBlogDtos);
             result.Should().HaveCount(3);
+  
 
 
         }

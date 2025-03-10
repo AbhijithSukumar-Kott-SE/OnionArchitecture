@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using Castle.Core.Logging;
 using Mongo2Go;
 using MongoDB.Driver;
 using OnionArchitecture.Application.Mappings;
@@ -18,20 +19,20 @@ public class BlogServiceFixture : IDisposable
 
     public BlogServiceFixture()
     {
-        // 1️⃣ Start a Mongo2Go instance
+        // 1️ Start a Mongo2Go instance
         MongoRunner = MongoDbRunner.Start();
         var client = new MongoClient(MongoRunner.ConnectionString);
         Database = client.GetDatabase("TestDb");
 
-        // 2️⃣ Set up MongoDbContext and Repository
+        // 2️ Set up MongoDbContext and Repository
         DbContext = new MongoDbContext(client, "TestDb");
         BlogRepository = new BlogRepository(DbContext);
 
-        // 3️⃣ Configure AutoMapper
+        // 3️ Configure AutoMapper
         var config = new MapperConfiguration(cfg => cfg.AddProfile<BlogProfile>());
         Mapper = config.CreateMapper();
 
-        // 4️⃣ Initialize BlogService
+        // 4️ Initialize BlogService
         BlogService = new BlogService(BlogRepository, Mapper);
     }
 
