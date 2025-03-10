@@ -21,7 +21,7 @@ namespace OnionArchitecture.Infrastructure
 
             services.AddScoped<IBlogRepository, BlogRepository>();
 
-            return services;
+            return services;  
         }
     }
 }
