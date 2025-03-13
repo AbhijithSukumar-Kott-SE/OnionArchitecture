@@ -6,16 +6,8 @@ using AutoMapper;
 
 namespace OnionArchitecture.Application.Services
 {
-    public class BlogService : IBlogService
+    public class BlogService(IBlogRepository _blogRepository, IMapper _mapper) : IBlogService
     {
-        private readonly IBlogRepository _blogRepository;
-        private readonly IMapper _mapper;
-
-        public BlogService(IBlogRepository blogRepository, IMapper mapper)
-        {
-            _blogRepository = blogRepository;
-            _mapper = mapper;
-        }
 
         public async Task<IEnumerable<BlogDto>> getAllBlogsAsync()
         {

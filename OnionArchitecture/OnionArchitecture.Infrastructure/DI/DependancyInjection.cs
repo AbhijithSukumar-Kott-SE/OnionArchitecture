@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using OnionArchitecture.Infrastructure.DBContext;
 using OnionArchitecture.Infrastructure.Repositories;
 using OnionArchitecture.Core.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace OnionArchitecture.Infrastructure
 {

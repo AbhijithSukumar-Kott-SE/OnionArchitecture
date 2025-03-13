@@ -6,6 +6,7 @@ using OnionArchitecture.Infrastructure.Repositories;
 using OnionArchitecture.Application.Services;
 using OnionArchitecture.Infrastructure;
 using OnionArchitecture.Application.Mappings;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,10 @@ builder.Services.AddInfrastructureServices(configuration);
 
 //  Register Application Layer Dependencies
 builder.Services.AddScoped<IBlogService, BlogService>();
+
+// Register MediatR with Application layer assembly
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(OnionArchitecture.Application.Commands.BlogCommands.AddBlogCommand).Assembly));
+
 
 //  Add Controllers
 builder.Services.AddControllers();
